@@ -2,19 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test</title>
+    <title>Formular</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
     <h1>Darf ich vorstellen? Der Budget-Rechner!</h1>
-    <p>Bitte gib hier deinen Namen ein:</p>
 
     <form method="POST">
-        <input type="text" name="vorname" placeholder="Name">
+
+        <p>Bitte gib untenstehend deine Daten ein:</p>
+        <input type="text" name="name" placeholder="Name"><br><br>
+        <input type="text" name="datum" placeholder="Datum"><br><br>
+        <input type="text" name="bezeichnung" placeholder="Bezeichnung"><br><br>
+        <input type="text" name="kategorie" placeholder="Kategorie"><br><br>
+        <input type="text" name="betrag" placeholder="Betrag">
+        <input type="text" name="betrag2" placeholder="weiterer Betrag">
+        <input type="text" name="betrag3" placeholder="weiterer Betrag"><br><br>
+        <input type="text" name="notiz" placeholder="Notiz"><br><br>
+
         <button type="submit">Senden</button>
     </form>
-
-    <h2>Hallo {{ name }} </h2>
 
 
 
