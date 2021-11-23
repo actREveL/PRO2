@@ -1,0 +1,20 @@
+{% include "header.html" %}
+<body>
+{% include "nav.html" %}
+    <div class="container-fluid">
+        <h3>Please check your entry:</h3>
+        <p>Name: {{ name }}<br>
+            Date: {{ datum }}<br>
+            Description: {{ bezeichnung }}<br>
+            Category: {{ kategorie }}<br>
+            Sum: {{ betrag }}<br>
+            Note: {{ notiz }}</p>
+<!--        <p>If they're correct press YES, if not press NO.</p>-->
+
+<!--        <form method="POST">-->
+<!--        <input type="submit" class="btn btn-primary brn-sm" name="yes" value="YES">-->
+<!--        <input type="submit" class="btn btn-secondary brn-sm" name="no" value="NO">-->
+<!--        </form>-->
+    </div>
+{% include "footer.html" %}
+

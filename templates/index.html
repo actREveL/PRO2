@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Formular</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-</head>
+{% include "header.html" %}
 <body>
-    <h1>Darf ich vorstellen? Der Budget-Rechner!</h1>
+{% include "nav.html" %}
+    <div class="container-fluid">
+    <h1>Hi there, user!</h1>
 
-    <form method="POST">
+    <p>Would you like to add a new entry?</p>
 
-        <p>Bitte gib untenstehend deine Daten ein:</p>
-        <input type="text" name="name" placeholder="Name"><br><br>
-        <input type="text" name="datum" placeholder="Datum"><br><br>
-        <input type="text" name="bezeichnung" placeholder="Bezeichnung"><br><br>
-        <input type="text" name="kategorie" placeholder="Kategorie"><br><br>
-        <input type="text" name="betrag" placeholder="Betrag">
-        <input type="text" name="betrag2" placeholder="weiterer Betrag">
-        <input type="text" name="betrag3" placeholder="weiterer Betrag"><br><br>
-        <input type="text" name="notiz" placeholder="Notiz"><br><br>
+<!--    <form method="GET">-->
+    <a href="{{ url_for('formular') }}"><button type="submit" class="btn btn-primary btn-sm">Yes, please</button></a>
+<!--    </form>-->
+        <br><br>
+        <a href="{{ url_for('uebersicht') }}">To my Overview</a>
+    </div>
 
-        <button type="submit">Senden</button>
-    </form>
-
-
-
-
-    <a href="{{ url_for('test')}}">Link zu Test</a>
-</body>
-</html>
-
+{% include "footer.html" %}

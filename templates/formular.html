@@ -1,0 +1,22 @@
+{% include "header.html" %}
+<body>
+{% include "nav.html" %}
+    <div class="container-fluid">
+        <h2>New entry</h2>
+
+    <form method="POST">
+        <p>Please fill out the form below:</p>
+        <input type="text" name="name" placeholder="name"><br><br>
+        <input type="text" name="datum" placeholder="date"><br><br>
+        <input type="text" name="bezeichnung" placeholder="description"><br><br>
+        <input type="text" name="kategorie" placeholder="category"><br><br>
+        <input type="text" name="betrag" placeholder="amount"><br><br>
+        <input type="text" name="notiz" placeholder="note"><br><br>
+
+        <button type="submit" class="btn btn-primary btn-sm">Send</button>
+
+    </form>
+
+    </div>
+{% include "footer.html" %}
+

@@ -1,49 +1,55 @@
 from flask import Flask
 from flask import render_template
 from flask import request
+import daten
 
 app = Flask("Your Budget Calculator")
 
 
-@app.route('/home', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
-        name_person = request.form['name']
-        rueckgabe_string_name = name_person
-        name_datum = request.form['datum']
-        rueckgabe_string_datum = name_datum
-        name_bezeichnung = request.form['bezeichnung']
-        rueckgabe_string_bezeichnung = name_bezeichnung
-        name_kategorie = request.form['kategorie']
-        rueckgabe_string_kategorie = name_kategorie
-        name_betrag = request.form['betrag']
-        rueckgabe_string_betrag = name_betrag
-        name_betrag2 = request.form['betrag2']
-        rueckgabe_string_betrag2 = name_betrag2
-        name_betrag3 = request.form['betrag3']
-        rueckgabe_string_betrag3 = name_betrag3
-        name_notiz = request.form['notiz']
-        rueckgabe_string_notiz = name_notiz
+        return render_template('formular.html')
+    return render_template('index.html')
 
 
-        # Variablen, Funktionen etc. oder auch abspeichern
+@app.route("/liste")
+def auflisten():
+    eingabe = daten.eingabe_laden()
+    eingabe_liste = ""
+    for key, value in eingabe.items():
+        zeile = str(key) + ": " + value + "<br>"
+        eingabe_liste += zeile
+    return eingabe_liste
 
-        return render_template('ausgaben.html',
-                               name=rueckgabe_string_name,
-                               datum=rueckgabe_string_datum,
-                               bezeichnung=rueckgabe_string_bezeichnung,
-                               kategorie=rueckgabe_string_kategorie,
-                               betrag=rueckgabe_string_betrag,
-                               betrag2=rueckgabe_string_betrag2,
-                               betrag3=rueckgabe_string_betrag3,
-                               notiz=rueckgabe_string_notiz)
+@app.route('/formular', methods=['GET', 'POST'])
+def formular():
+    if request.method == 'POST':
+        name = request.form['name']
+        datum = request.form['datum']
+        bezeichnung = request.form['bezeichnung']
+        kategorie = request.form['kategorie']
+        betrag = request.form['betrag']
+        notiz = request.form['notiz']
 
-    return render_template("index.html")
+        daten.speichern(name, datum, bezeichnung, kategorie, betrag, notiz)
+
+    return render_template('formular.html')
 
 
-@app.route('/passt')
-def test():
-    return "Passt!"
+# @app.route('/ausgabe')
+# def ausgabe():
+#     if form.validate_on_submit() == 'POST':
+#         if 'yes' in request.form:
+#             return render_template('uebersicht.html')
+#         elif 'no' in request.form:
+#             return render_template('formular.html')
+#     return render_template('ausgabe.html')
+
+@app.route('/uebersicht')
+def uebersicht():
+    daten.eingabe_laden()
+    return render_template('uebersicht.html')
 
 
 if __name__ == "__main__":
