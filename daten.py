@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 
+# Funktion, um eingegebene Daten speichern zu können und in einem File abzuspeichern
 def speichern(name, datum, bezeichnung, kategorie, betrag, notiz):
     datei = "uebersicht3.json"
     try:
@@ -19,7 +20,7 @@ def speichern(name, datum, bezeichnung, kategorie, betrag, notiz):
     with open(datei, "w") as open_file:
         json.dump(datei_inhalt, open_file, indent=4)
 
-
+# Funktion, um gespeicherte Daten laden zu können
 def eingabe_laden():
     datei_name = "uebersicht3.json"
 

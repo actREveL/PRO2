@@ -7,25 +7,25 @@ from plotly.offline import plot
 
 app = Flask("Your Budget Calculator")
 
-
-
+# Home / Startseite
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
         return render_template('formular.html')
     return render_template('index.html')
 
-# custom error page
-# invalid url
+# Custom Error Pages
+# Invalid URL
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
 
-# internal server error url
+# Internal Server Error URL
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template("500.html"), 500
 
+# Formularseite --> hier können neue Ausgaben angegeben werden
 @app.route('/formular', methods=['GET', 'POST'])
 def formular():
     if request.method == 'POST':
@@ -35,17 +35,19 @@ def formular():
         kategorie = request.form['kategorie']
         betrag = request.form['betrag']
         notiz = request.form['notiz']
-
+        # eigegebene Daten werden gespeichert
         daten.speichern(name, datum, bezeichnung, kategorie, betrag, notiz)
 
     return render_template('formular.html')
 
+# Übersichtsseite mit Cards
 @app.route('/uebersicht', methods=['GET', 'POST'])
 def uebersicht():
     eingabe = daten.eingabe_laden()
 
     return render_template('uebersicht.html', data=eingabe)
 
+# Übersichtsseite mit Balkendiagramm
 @app.route('/ausgabe')
 def ausgabe_monate():
     ausgabe = daten.eingabe_laden()

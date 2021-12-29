@@ -1,9 +1,11 @@
+<!-- Übernahme header -->
 {% include "header.html" %}
     <div class="container">
         {% block content %}
            <br><h2>Overview</h2>
             <div class="column"><br>
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                  <!-- for Condition -->
                  {% for key, value_dict in data.items()%}
                       <div class="col">
                           <div class="card h-100" style="width: 18rem;">
@@ -20,4 +22,5 @@
             </div>
         {% endblock %}
     </div>
+<!-- Übernahme footer -->
 {% include "footer.html" %}
