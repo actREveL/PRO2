@@ -1,9 +1,23 @@
 {% include "header.html" %}
-<body>
-{% include "nav.html" %}
-    <div class="container-fluid">
-    <h2>Overview</h2>
-
+    <div class="container">
+        {% block content %}
+           <br><h2>Overview</h2>
+            <div class="column"><br>
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                 {% for key, value_dict in data.items()%}
+                      <div class="col">
+                          <div class="card h-100" style="width: 18rem;">
+                              <div class="card-body">
+                                  {% for key2, value in value_dict.items()%}
+                                    <h5 class="card-title">{{ key2 }}</h5>
+                                    <p class="card-text">{{ value }}</p>
+                                  {% endfor %}
+                              </div>
+                          </div>
+                      </div><br>
+                  {% endfor %}
+              </div>
+            </div>
+        {% endblock %}
     </div>
-
 {% include "footer.html" %}

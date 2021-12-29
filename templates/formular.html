@@ -1,22 +1,66 @@
 {% include "header.html" %}
-<body>
-{% include "nav.html" %}
-    <div class="container-fluid">
-        <h2>New entry</h2>
+    <div class="container">
+        {% block content %}
+            <br><h2>New entry</h2>
+            <form method="POST">
+                <p>Please fill out the form below:</p>
+                <input type="text" name="name" placeholder="name"><br><br>
+                <input type="text" name="datum" placeholder="date"><br><br>
+                <input type="text" name="bezeichnung" placeholder="description"><br><br>
+                <input type="text" name="betrag" placeholder="amount"><br><br>
+                Category:<br><br>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category1" name="kategorie" value="Transport">
+                    <label class="form-check-label" for="category1">Transport</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category2" name="kategorie" value="Groceries">
+                    <label class="form-check-label" for="category2">Groceries</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category3" name="kategorie" value="Car / Bike">
+                    <label class="form-check-label" for="category3">Car / Bike</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category4" name="kategorie" value="Restaurant / Bar / Club">
+                    <label class="form-check-label" for="category4">Restaurant / Bar / Club</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category5" name="kategorie" value="Beauty">
+                    <label class="form-check-label" for="category5">Beauty</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category6" name="kategorie" value="Shopping">
+                    <label class="form-check-label" for="category6">Shopping</label>
+                </div><br>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category7" name="kategorie" value="Travel">
+                    <label class="form-check-label" for="category7">Travel</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category8" name="kategorie" value="Household">
+                    <label class="form-check-label" for="category8">Household</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category9" name="kategorie" value="Freetime">
+                    <label class="form-check-label" for="category9">Freetime</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category10" name="kategorie" value="Services">
+                    <label class="form-check-label" for="category10">Services</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category11" name="kategorie" value="Divers">
+                    <label class="form-check-label" for="category11">Divers</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="category12" name="kategorie" value="Cash">
+                    <label class="form-check-label" for="category12">Cash</label>
+                </div><br><br>
+                <input type="text" name="notiz" placeholder="note"><br><br>
 
-    <form method="POST">
-        <p>Please fill out the form below:</p>
-        <input type="text" name="name" placeholder="name"><br><br>
-        <input type="text" name="datum" placeholder="date"><br><br>
-        <input type="text" name="bezeichnung" placeholder="description"><br><br>
-        <input type="text" name="kategorie" placeholder="category"><br><br>
-        <input type="text" name="betrag" placeholder="amount"><br><br>
-        <input type="text" name="notiz" placeholder="note"><br><br>
-
-        <button type="submit" class="btn btn-primary btn-sm">Send</button>
-
-    </form>
-
+                <button type="submit" class="btn btn-primary btn-sm">Send</button>
+            </form>
+        {% endblock %}
     </div>
 {% include "footer.html" %}
-
