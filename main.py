@@ -40,33 +40,56 @@ def formular():
 
     return render_template('formular.html')
 
-# Übersichtsseite mit Cards
+# Übersichtsseite mit Cards --> holt Infos aus daten.py (Dict) und stellt sie "schön" dar
 @app.route('/uebersicht', methods=['GET', 'POST'])
 def uebersicht():
     eingabe = daten.eingabe_laden()
+    filter_liste = []
 
-    return render_template('uebersicht.html', data=eingabe)
+    if request.method == 'POST':
+        name = request.form['name']
+        kategorie = request.form['kategorie']
+        betrag = request.form['betrag']
+
+        if name != "":
+            filter = name
+            filter_key = "name"
+
+        elif kategorie != "":
+            filter = kategorie
+            filter_key = "category"
+
+        elif betrag != "":
+            filter = betrag
+            filter_key = "sum"
+
+        for key, eintrag in eingabe.items():
+            if eintrag[filter_key] == filter:
+                filter_liste.append(eintrag)
+
+    return render_template('uebersicht.html', data=eingabe, user=filter_liste)
 
 # Übersichtsseite mit Balkendiagramm
 @app.route('/ausgabe')
-def ausgabe_monate():
+def statistik():
     ausgabe = daten.eingabe_laden()
     monate = {}
 
     for id, values in ausgabe.items():
-        month = values["date"].split(".")[1]
+        month = values["Date"].split(".")[1]
         if not monate.get(month):
-            monate[month] = values["sum"]
+            monate[month] = float(values["Sum"])
         else:
-            monate[month] = monate[month] + values["sum"]
+            monate[month] = monate[month] + float(values["Sum"])
 
     x = list(monate.keys())
     y = list(monate.values())
 
     fig = px.bar(x=x, y=y)
-    fig.show()
+    # fig.show() --> erzeugt eigenen Browser, anstelle wurde div (s. Z. 90 verwendet)
+    div = plot(fig, output_type="div")
 
-    return render_template('ausgabe.html')
+    return render_template('ausgabe.html', viz_div=div)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

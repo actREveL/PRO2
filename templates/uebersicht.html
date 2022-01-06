@@ -2,10 +2,27 @@
 {% include "header.html" %}
     <div class="container">
         {% block content %}
-           <br><h2>Overview</h2>
+        <br><h2>Overview</h2>
+        <form method="POST">
+            If you'd like to search for a person, the amount or category, please fill out the appropriate field <b>(only one!)</b>.<br><br>
+            <div class="row align-items-start">
+                <div class="col">
+                    Name: <input type="text" name="name" placeholder="">
+                </div>
+                <div class="col">
+                    Category: <input type="text" name="kategorie" placeholder="">
+                </div>
+                <div class="col">
+                    Amount: <input type="text" name="betrag" placeholder="">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                </div>
+            </div>
+        </form>
             <div class="column"><br>
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                  <!-- for Condition -->
+                  <!-- for-Condition -->
                  {% for key, value_dict in data.items()%}
                       <div class="col">
                           <div class="card h-100" style="width: 18rem;">
@@ -16,10 +33,10 @@
                                   {% endfor %}
                               </div>
                           </div>
-                      </div><br>
+                      </div>
                   {% endfor %}
               </div>
-            </div>
+            </div><br>
         {% endblock %}
     </div>
 <!-- Übernahme footer -->
