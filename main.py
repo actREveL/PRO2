@@ -84,8 +84,15 @@ def statistik():
 
     x = list(monate.keys())
     y = list(monate.values())
+    color = ausgabe['name']
 
-    fig = px.bar(x=x, y=y)
+    fig = px.bar(x=x, y=y, labels={"x": "Monate",
+                                   "y": "Betrag in CHF"},
+                 color=color,
+                 title="Ausgaben über die Monate hinweg")
+    # https://plotly.com/python/figure-labels/ für Benennung der Achsen & Titel,
+    # https://careerkarma.com/blog/python-typeerror-unhashable-type-list/ --> für Problembehebung "unhashable list"
+
     # fig.show() --> erzeugt eigenen Browser, anstelle wurde div (s. Z. 90 verwendet)
     div = plot(fig, output_type="div")
 
