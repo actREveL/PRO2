@@ -2,71 +2,89 @@
 {% include "header.html" %}
     <div class="container">
         {% block content %}
-            <br><h2>New entry</h2>
+            <br><h2>Neuer Eintrag</h2>
             <form method="POST">
-                <p>Please fill out the form below:</p>
-                <i class="bi bi-person-fill"></i>
-                <input type="text" name="name" placeholder="name"><br><br>
-                <i class="bi bi-calendar-event"></i>
-                <input type="text" name="datum" placeholder="date"><br><br>
-                <i class="bi bi-cart4"></i>
-                <input type="text" name="bezeichnung" placeholder="description"><br><br>
-                <i class="bi bi-currency-dollar"></i>
-                <input type="text" name="betrag" placeholder="amount"><br><br>
-                <i class="bi bi-tag-fill"></i>
-                Category:<br><br>
+                <p>Bitte fülle das untenstehende Formular aus.<br>
+                ACHTUNG: Möchte ein Feld nicht ausgefüllt werden, bitte "-" einsetzen.</p>
+
+                <div class="form-group">
+                    <label for="home">Wähle einen Nutzer aus:</label>
+                    <select class="form-control" id="home" name="name">
+                      <option>Samira</option>
+                      <option>Remo</option>
+                    </select>
+                </div>
+                <!-- <i class="bi bi-calendar-event"></i> -->
+                <div class="form-group">
+                    <label for="datum">Wann hast du dir etwas gegönnt?</label>
+                    <input class="form-control" type="text" name="datum" placeholder="Datum" id="datum">
+                </div>
+                <!--<i class="bi bi-cart4"></i>-->
+                <div class="form-group">
+                    <label for="bezeichnung">Was hast du dir gegönnt?</label>
+                    <input class="form-control" type="text" name="bezeichnung" placeholder="Bezeichnung" id="bezeichnung">
+                </div>
+                <!--<i class="bi bi-currency-dollar"></i>-->
+                <div class="form-group">
+                    <label for="betrag">Wie viel hat es gekostet?</label>
+                    <input class="form-control" type="text" name="betrag" placeholder="Betrag" id="betrag">
+                </div>
+                <!--<i class="bi bi-tag-fill"></i>-->
+                Welcher Kategorie möchtest du es zuordnen?<br>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category1" name="kategorie" value="Transport">
+                    <input type="radio" class="form-check-input" id="category1" name="kategorie" value="Transport">
                     <label class="form-check-label" for="category1">Transport</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category2" name="kategorie" value="Groceries">
-                    <label class="form-check-label" for="category2">Groceries</label>
+                    <input type="radio" class="form-check-input" id="category2" name="kategorie" value="Groceries">
+                    <label class="form-check-label" for="category2">Lebensmittel</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category3" name="kategorie" value="Car / Bike">
-                    <label class="form-check-label" for="category3">Car / Bike</label>
+                    <input type="radio" class="form-check-input" id="category3" name="kategorie" value="Car / Bike">
+                    <label class="form-check-label" for="category3">Auto / Motorrad</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category4" name="kategorie" value="Restaurant / Bar / Club">
+                    <input type="radio" class="form-check-input" id="category4" name="kategorie" value="Restaurant / Bar / Club">
                     <label class="form-check-label" for="category4">Restaurant / Bar / Club</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category5" name="kategorie" value="Beauty">
-                    <label class="form-check-label" for="category5">Beauty</label>
+                    <input type="radio" class="form-check-input" id="category5" name="kategorie" value="Beauty">
+                    <label class="form-check-label" for="category5">Schönheit</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category6" name="kategorie" value="Shopping">
+                    <input type="radio" class="form-check-input" id="category6" name="kategorie" value="Shopping">
                     <label class="form-check-label" for="category6">Shopping</label>
-                </div><br>
+                </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category7" name="kategorie" value="Travel">
-                    <label class="form-check-label" for="category7">Travel</label>
+                    <input type="radio" class="form-check-input" id="category7" name="kategorie" value="Travel">
+                    <label class="form-check-label" for="category7">Reisen</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input type="checkbox" class="form-check-input" id="category8" name="kategorie" value="Household">
-                    <label class="form-check-label" for="category8">Household</label>
+                    <label class="form-check-label" for="category8">Haushalt</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category9" name="kategorie" value="Freetime">
-                    <label class="form-check-label" for="category9">Freetime</label>
+                    <input type="radio" class="form-check-input" id="category9" name="kategorie" value="Freetime">
+                    <label class="form-check-label" for="category9">Freizeit</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category10" name="kategorie" value="Services">
+                    <input type="radio" class="form-check-input" id="category10" name="kategorie" value="Services">
                     <label class="form-check-label" for="category10">Services</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category11" name="kategorie" value="Divers">
+                    <input type="radio" class="form-check-input" id="category11" name="kategorie" value="Divers">
                     <label class="form-check-label" for="category11">Divers</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input" id="category12" name="kategorie" value="Cash">
+                    <input type="radio" class="form-check-input" id="category12" name="kategorie" value="Cash">
                     <label class="form-check-label" for="category12">Cash</label>
                 </div><br><br>
-                <i class="bi bi-info"></i>
-                <input type="text" name="notiz" placeholder="note"><br><br>
-
-                <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                <!--<i class="bi bi-info"></i>-->
+                <div class="form-group">
+                    <label for="notiz">Wenn du möchtest, kannst du hier noch eine Notiz erfassen:</label>
+                    <input class="form-control" type="text" name="notiz" placeholder="Notiz" id="notiz">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Senden</button><br><br>
             </form>
         {% endblock %}
     </div>

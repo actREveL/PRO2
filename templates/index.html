@@ -1,17 +1,20 @@
 <!-- Übernahme header -->
 {% include "header.html" %}
-    <div class="container">
-        {% block content %}
-        <br><h1>Hi there, user!</h1>
-
-        <p>Would you like to add a new entry?</p>
-
-    <!--    <form method="GET">-->
-        <a href="{{ url_for('formular') }}"><button type="submit" class="btn btn-primary btn-sm">Yes, please</button></a>
-    <!--    </form>-->
-            <br><br>
-            <a href="{{ url_for('uebersicht') }}">To my Overview</a>
+    {% block content %}
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Hallo {{user}}</h1>
+                <p class="lead">Willkommen bei deinem persönlich Budget-Rechner.</p>
+                <p class="my-4">Möchtest du gerne eine neue Eingabe machen?</p>
+                <p class="lead">
+                        <!--    <form method="GET">-->
+                        <a class="btn btn-primary btn-lg" href="{{ url_for('formular') }}" role="button" type="submit">Ja, gerne!</a><br><br>
+                        <!--    </form>-->
+                        <a href="{{ url_for('uebersicht') }}">Nein, danke - Zur Übersicht.</a>
+                </p>
+            </div>
+        </div>
         {% endblock %}
-    </div>
+
 <!-- Übernahme footer -->
 {% include "footer.html" %}

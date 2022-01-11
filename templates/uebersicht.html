@@ -2,37 +2,35 @@
 {% include "header.html" %}
     <div class="container">
         {% block content %}
-        <br><h2>Overview</h2>
+        <br><h2>Übersicht</h2>
         <form method="POST">
-            If you'd like to search for a person, the amount or category, please fill out the appropriate field <b>(only one!)</b>.<br><br>
+            Möchtest du gerne nach einer bestimmten Person, einem Betrag oder Kategorie filtern, fülle das entsprechende Feld aus. Aber <b>NUR EINES</b>!<br><br>
             <div class="row align-items-start">
                 <div class="col">
-                    Name: <input type="text" name="name" placeholder="">
+                    <input type="text" name="name" placeholder="Name">
                 </div>
                 <div class="col">
-                    Category: <input type="text" name="kategorie" placeholder="">
+                    <input type="text" name="kategorie" placeholder="Kategorie">
                 </div>
                 <div class="col">
-                    Amount: <input type="text" name="betrag" placeholder="">
+                    <input type="text" name="betrag" placeholder="Betrag">
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-sm">Send</button>
+                    <button type="submit" class="btn btn-primary btn-sm">Senden</button>
                 </div>
             </div>
         </form>
             <div class="column"><br>
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+              <div class="card-columns">
                   <!-- for-Condition -->
                  {% for key, value_dict in data.items()%}
-                      <div class="col">
-                          <div class="card h-100" style="width: 18rem;">
+                      <div class="card">
                               <div class="card-body">
                                   {% for key2, value in value_dict.items()%}
                                     <h5 class="card-title">{{ key2 }}</h5>
                                     <p class="card-text">{{ value }}</p>
                                   {% endfor %}
                               </div>
-                          </div>
                       </div>
                   {% endfor %}
               </div>

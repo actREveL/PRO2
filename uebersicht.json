@@ -1,0 +1,50 @@
+{
+    "2022-01-07 15:24:16.361721": {
+        "Name": "Samira ",
+        "Datum": "07.01.2022",
+        "Bezeichnung": "Spotify-Abo",
+        "Kategorie": "Services",
+        "Betrag": "6.45",
+        "Notiz": "Studi-Abo"
+    },
+    "2022-01-10 11:34:27.366840": {
+        "Name": "Samira ",
+        "Datum": "02.02.2021",
+        "Bezeichnung": "Pizza",
+        "Kategorie": "Restaurant / Bar / Club",
+        "Betrag": "55",
+        "Notiz": "Tinus + Ich"
+    },
+    "2022-01-10 11:43:56.077531": {
+        "Name": "Samira ",
+        "Datum": "10.01.2021",
+        "Bezeichnung": "Kauz",
+        "Kategorie": "Restaurant / Bar / Club",
+        "Betrag": "25",
+        "Notiz": "Eintritt"
+    },
+    "2022-01-10 16:29:17.688356": {
+        "Name": "Samira",
+        "Datum": "02.02.2021",
+        "Bezeichnung": "Guarana",
+        "Kategorie": "Groceries",
+        "Betrag": "2",
+        "Notiz": "test"
+    },
+    "2022-01-10 17:30:32.769741": {
+        "Name": "Samira",
+        "Datum": "11.01.2021",
+        "Bezeichnung": "Zmittag",
+        "Kategorie": "Groceries",
+        "Betrag": "14.50",
+        "Notiz": "Schinkegipfeli mit Salat"
+    },
+    "2022-01-10 17:46:55.539050": {
+        "Name": "Remo",
+        "Datum": "01.02.2021",
+        "Bezeichnung": "Alkohol",
+        "Kategorie": "Freetime",
+        "Betrag": "49.95",
+        "Notiz": "Silvester"
+    }
+}

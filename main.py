@@ -12,7 +12,7 @@ app = Flask("Your Budget Calculator")
 def home():
     if request.method == 'POST':
         return render_template('formular.html')
-    return render_template('index.html')
+    return render_template('index.html', user="Samira")
 
 # Custom Error Pages
 # Invalid URL
@@ -38,9 +38,10 @@ def formular():
         # eigegebene Daten werden gespeichert
         daten.speichern(name, datum, bezeichnung, kategorie, betrag, notiz)
 
+    # formular.html wird gerendert und zeigt leere Zeilen an, wenn nicht eingegeben. Wird dann jedoch etwas eingegeben und gesendet, werden diese Daten mit daten.speichern (Funktion in daten.py) im json-file abgespeichert.
     return render_template('formular.html')
 
-# Übersichtsseite mit Cards --> holt Infos aus daten.py (Dict) und stellt sie "schön" dar
+# Übersichtsseite mit Cards --> holt Infos aus daten.py (dem Dictionary) und stellt sie "schön" dar
 @app.route('/uebersicht', methods=['GET', 'POST'])
 def uebersicht():
     eingabe = daten.eingabe_laden()
@@ -53,50 +54,62 @@ def uebersicht():
 
         if name != "":
             filter = name
-            filter_key = "name"
+            filter_key = "Name"
 
         elif kategorie != "":
             filter = kategorie
-            filter_key = "category"
+            filter_key = "Kategorie"
 
         elif betrag != "":
             filter = betrag
-            filter_key = "sum"
+            filter_key = "Betrag"
 
         for key, eintrag in eingabe.items():
             if eintrag[filter_key] == filter:
                 filter_liste.append(eintrag)
+
+
+
 
     return render_template('uebersicht.html', data=eingabe, user=filter_liste)
 
 # Übersichtsseite mit Balkendiagramm
 @app.route('/ausgabe')
 def statistik():
-    ausgabe = daten.eingabe_laden()
-    monate = {}
+    ausgabe = daten.eingabe_laden() # Dictionary (alle Daten) von daten.py wird geladen
+    monate = {} # leeres dict für Monate 01-12 (Jan-Dez) definiert, welches mit der unteren for-Schleife gefüllt wird
 
     for id, values in ausgabe.items():
-        month = values["Date"].split(".")[1]
+        month = values["Datum"].split(".")[1] # Datum splitten, sodass nur Monat (01 = Jan etc.) übrigbleibt
+
         if not monate.get(month):
-            monate[month] = float(values["Sum"])
+            monate[month] = float(values["Betrag"]) # Betrag hinzufügen
         else:
-            monate[month] = monate[month] + float(values["Sum"])
+            monate[month] = monate[month] + float(values["Betrag"]) # Betrag hinzufügen und zu Monat addieren
 
-    x = list(monate.keys())
-    y = list(monate.values())
-    color = ausgabe['name']
+    x = list(monate.keys()) # Liste für Monate --> kann so in Barchart eingelesen werden
+    y = list(monate.values()) # Liste für Beträge/Monat --> kann so in Barchart eingelesen werden
+    # nutzer = ausgabe["Name"] --> wieso funktioniert das nicht?!
 
+    # hier wird der Barchart erstellt bzw. werden die Daten mitgegeben, welche für den Barchart erforderlich sind
     fig = px.bar(x=x, y=y, labels={"x": "Monate",
                                    "y": "Betrag in CHF"},
-                 color=color,
+                 # color=nutzer,
                  title="Ausgaben über die Monate hinweg")
-    # https://plotly.com/python/figure-labels/ für Benennung der Achsen & Titel,
+    # https://plotly.com/python/figure-labels/ für Benennung der Achsen & Titel mittels labels
     # https://careerkarma.com/blog/python-typeerror-unhashable-type-list/ --> für Problembehebung "unhashable list"
 
     # fig.show() --> erzeugt eigenen Browser, anstelle wurde div (s. Z. 90 verwendet)
     div = plot(fig, output_type="div")
 
-    return render_template('ausgabe.html', viz_div=div)
+    # Summe berechnen für Total (über alle Monate hinweg)
+    sum_liste = list(monate.values())
+    sum = 0
+    for element in sum_liste:
+        sum+=float(element)
+
+    # rendern des Templates "ausgabe.html" zeigt dann den Barchart an und nimmt monate und total mit für die Liste mit den Beiträgen/Monat und die Gesamtausgaben über alle Einträge hinweg
+    return render_template('ausgabe.html', viz_div=div, monate=monate, total=sum)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -1,6 +1,12 @@
 {% include "header.html" %}
 <div class="container">
-{{ viz_div|safe}}
+    <br><h2>Statistik</h2>
+{{ viz_div|safe}}<br>
+    <h3>Totalausgaben</h3>
+        {% for monat, betrag in monate.items()%}
+            {{ monat }}: CHF {{ betrag }}<br>
+        {% endfor %}<br>
+    Total über alle Monate hinweg: <b>CHF {{ total }}</b><br>
 </div>
 {% include "footer.html" %}
 
