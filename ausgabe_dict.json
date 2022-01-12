@@ -1,0 +1,26 @@
+{
+    "2022-01-12 16:57:23.469150": {
+        "Name": "Samira",
+        "Datum": "11.01.2022",
+        "Bezeichnung": "Spotify-Abo",
+        "Kategorie": "Services",
+        "Betrag": "6.50",
+        "Notiz": "Studi-Abo"
+    },
+    "2022-01-12 16:58:08.197225": {
+        "Name": "Remo",
+        "Datum": "12.01.2022",
+        "Bezeichnung": "Booze",
+        "Kategorie": "Freetime",
+        "Betrag": "25.00",
+        "Notiz": "Bday Fabian"
+    },
+    "2022-01-12 17:08:07.536382": {
+        "Name": "Samira",
+        "Datum": "13.01.2022",
+        "Bezeichnung": "Weinkiste",
+        "Kategorie": "Freetime",
+        "Betrag": "66.00",
+        "Notiz": "weil gerade Aktion"
+    }
+}

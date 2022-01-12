@@ -46,6 +46,8 @@ def formular():
 def uebersicht():
     eingabe = daten.eingabe_laden()
     filter_liste = []
+    filter = ""
+    filter_key = ""
 
     if request.method == 'POST':
         name = request.form['name']
@@ -56,11 +58,11 @@ def uebersicht():
             filter = name
             filter_key = "Name"
 
-        elif kategorie != "":
+        if kategorie != "":
             filter = kategorie
             filter_key = "Kategorie"
 
-        elif betrag != "":
+        if betrag != "":
             filter = betrag
             filter_key = "Betrag"
 
@@ -68,16 +70,14 @@ def uebersicht():
             if eintrag[filter_key] == filter:
                 filter_liste.append(eintrag)
 
-
-
-
     return render_template('uebersicht.html', data=eingabe, user=filter_liste)
 
 # Übersichtsseite mit Balkendiagramm
-@app.route('/ausgabe')
+@app.route('/ausgabe', methods=['GET', 'POST'])
 def statistik():
     ausgabe = daten.eingabe_laden() # Dictionary (alle Daten) von daten.py wird geladen
     monate = {} # leeres dict für Monate 01-12 (Jan-Dez) definiert, welches mit der unteren for-Schleife gefüllt wird
+
 
     for id, values in ausgabe.items():
         month = values["Datum"].split(".")[1] # Datum splitten, sodass nur Monat (01 = Jan etc.) übrigbleibt
@@ -106,10 +106,17 @@ def statistik():
     sum_liste = list(monate.values())
     sum = 0
     for element in sum_liste:
-        sum+=float(element)
+        sum += float(element)
 
-    # rendern des Templates "ausgabe.html" zeigt dann den Barchart an und nimmt monate und total mit für die Liste mit den Beiträgen/Monat und die Gesamtausgaben über alle Einträge hinweg
-    return render_template('ausgabe.html', viz_div=div, monate=monate, total=sum)
+    # Budget berechnen
+    verfuegbar = 0
+    if request.method == 'POST':
+        budget = request.form['budget']
+        budget = float(budget) - float(sum)
+        verfuegbar = verfuegbar + budget
+
+    # rendern des Templates "ausgabe.html" zeigt dann den Barchart an und nimmt Monate und Total mit für die Liste mit den Beiträgen/Monat und die Gesamtausgaben über alle Einträge hinweg
+    return render_template('ausgabe.html', viz_div=div, monate=monate, total=sum, ergebnis=verfuegbar)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

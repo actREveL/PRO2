@@ -1,41 +1,68 @@
 <!-- Übernahme header -->
 {% include "header.html" %}
+{% block content %}
     <div class="container">
-        {% block content %}
         <br><h2>Übersicht</h2>
         <form method="POST">
             Möchtest du gerne nach einer bestimmten Person, einem Betrag oder Kategorie filtern, fülle das entsprechende Feld aus. Aber <b>NUR EINES</b>!<br><br>
-            <div class="row align-items-start">
+            <div class="row g-3">
                 <div class="col">
-                    <input type="text" name="name" placeholder="Name">
+                    <input type="text" class="form-control" name="name" placeholder="Name">
                 </div>
                 <div class="col">
-                    <input type="text" name="kategorie" placeholder="Kategorie">
+                    <input type="text" class="form-control" name="kategorie" placeholder="Kategorie">
                 </div>
                 <div class="col">
-                    <input type="text" name="betrag" placeholder="Betrag">
+                    <input type="text" class="form-control" name="betrag" placeholder="Betrag">
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-primary btn-sm">Senden</button>
+                    <button type="submit" class="btn btn-primary" >Suchen</button>
                 </div>
             </div>
-        </form>
+        </form><br>
+        <div class="column">
+            <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Datum</th>
+                    <th scope="col">Bezeichnung</th>
+                    <th scope="col">Kategorie</th>
+                    <th scope="col">Betrag</th>
+                    <th scope="col">Notiz</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for inhalt in user %}
+                <tr>
+                    {% for key, value in inhalt.items() %}
+                  <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        </div>
             <div class="column"><br>
-              <div class="card-columns">
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                   <!-- for-Condition -->
                  {% for key, value_dict in data.items()%}
-                      <div class="card">
+                  <div class="col">
+                      <div class="card h-100" style="width: 18rem;">
+                          <div class="card">
                               <div class="card-body">
                                   {% for key2, value in value_dict.items()%}
                                     <h5 class="card-title">{{ key2 }}</h5>
                                     <p class="card-text">{{ value }}</p>
                                   {% endfor %}
                               </div>
+                          </div>
                       </div>
+                  </div>
                   {% endfor %}
               </div>
             </div><br>
-        {% endblock %}
     </div>
+{% endblock %}
 <!-- Übernahme footer -->
 {% include "footer.html" %}

@@ -4,7 +4,7 @@ from datetime import datetime
 
 # Funktion, um eingegebene Daten speichern zu können und in einem File abzuspeichern
 def speichern(name, datum, bezeichnung, kategorie, betrag, notiz):
-    datei = "uebersicht.json"
+    datei = "ausgabe_dict.json"
     try:
         with open(datei) as open_file:
             datei_inhalt = json.load(open_file)
@@ -24,7 +24,7 @@ def speichern(name, datum, bezeichnung, kategorie, betrag, notiz):
 
 # Funktion, um gespeicherte Daten laden zu können
 def eingabe_laden():
-    datei_name = "uebersicht.json"
+    datei_name = "ausgabe_dict.json"
 
     try:
         with open(datei_name) as open_file:
