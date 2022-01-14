@@ -21,11 +21,20 @@
                 <form method="POST">
                     <div class="form-group">
                         <label for="budget">Dein monatliches Budget:</label>
-                        <input class="form-control" type="text" name="budget" placeholder="Bitte gib eine Zahl ein..." id="budget"><br>
-                        <button type="submit" class="btn btn-primary">Prüfen</button>
+                        <input class="form-control" type="text" name="budget" placeholder="Bitte gib eine Zahl ein..." id="budget">
                     </div>
-                    Noch verfügbar: <b>CHF {{ ergebnis }}</b><br><br>
-                </form>
+                    <div class="form-group">
+                        <label for="inputMonat">Für welchen Monat?</label>
+                        <select id="inputMonat" class="form-control" name="monat">
+                            <option selected>...</option>
+                            {% for monat in monate %}
+                            <option>{{ monat }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Prüfen</button>
+                </form><br>
+                Noch verfügbar: <b>CHF {{ ergebnis }}</b><br><br>
             </div>
         </div>
     </div>

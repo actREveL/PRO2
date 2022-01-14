@@ -4,27 +4,50 @@
     <div class="container">
         <br><h2>Übersicht</h2>
         <form method="POST">
-            Möchtest du gerne nach einer bestimmten Person, einem Betrag oder Kategorie filtern, fülle das entsprechende Feld aus. Aber <b>NUR EINES</b>!<br><br>
+            Möchtest du gerne nach einer bestimmten Person, einem Betrag oder Kategorie filtern, fülle das entsprechende Feld aus. <b>NUR EINES</b>!<br><br>
             <div class="row g-3">
-                <div class="col">
-                    <input type="text" class="form-control" name="name" placeholder="Name">
+                <div class="form-group col">
+                    <label for="inputKategorie">Kategorie</label>
+                    <select id="inputKategorie" class="form-control" name="kategorie">
+                    <!--<input type="text" class="form-control" name="kategorie" placeholder="Kategorie">-->
+                        <option selected>Kategorie auswählen...</option>
+                        <option>Transport</option>
+                        <option>Lebensmittel</option>
+                        <option>Auto / Motorrad</option>
+                        <option>Restaurant / Bar / Club</option>
+                        <option>Schönheit</option>
+                        <option>Shopping</option>
+                        <option>Reisen</option>
+                        <option>Haushalt</option>
+                        <option>Freizeit</option>
+                        <option>Services</option>
+                        <option>Divers</option>
+                        <option>Cash</option>
+                    </select>
                 </div>
-                <div class="col">
-                    <input type="text" class="form-control" name="kategorie" placeholder="Kategorie">
-                </div>
-                <div class="col">
-                    <input type="text" class="form-control" name="betrag" placeholder="Betrag">
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary" >Suchen</button>
+                <div class="form-group col">
+                    <label for="inputBetrag">Betrag</label>
+                    <select id="inputBetrag" class="form-control" name="betrag">
+                        <option selected>...</option>
+                        <option>< 20</option>
+                        <option>< 100</option>
+                        <option>< 200</option>
+                        <option>> 200</option>
+                    </select>
                 </div>
             </div>
+                <div class="row g-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary" >Suchen</button>
+                    </div>
+                </div>
         </form><br>
         <div class="column">
+            {% if Kat %}
+            {% if user %}
             <table class="table">
               <thead>
                 <tr>
-                    <th scope="col">Name</th>
                     <th scope="col">Datum</th>
                     <th scope="col">Bezeichnung</th>
                     <th scope="col">Kategorie</th>
@@ -34,16 +57,21 @@
               </thead>
               <tbody>
               {% for inhalt in user %}
-                <tr>
-                    {% for key, value in inhalt.items() %}
-                  <td>{{ value }}</td>
-                    {% endfor %}
-                </tr>
+                    <tr>
+                        {% for key, value in inhalt.items() %}
+                      <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
               {% endfor %}
               </tbody>
             </table>
+            {% else %}
+            Kein Eintrag zu dieser Kategorie gefunden.
+            {% endif %}
+            {% endif %}
         </div>
             <div class="column"><br>
+                {% if not Kat %}
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                   <!-- for-Condition -->
                  {% for key, value_dict in data.items()%}
@@ -61,7 +89,9 @@
                   </div>
                   {% endfor %}
               </div>
-            </div><br>
+                {% endif %}
+            </div>
+        <br>
     </div>
 {% endblock %}
 <!-- Übernahme footer -->
