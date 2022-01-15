@@ -4,9 +4,9 @@
     <div class="container">
         <br><h2>Übersicht</h2>
         <form method="POST">
-            Möchtest du gerne nach einer bestimmten Person, einem Betrag oder Kategorie filtern, fülle das entsprechende Feld aus. <b>NUR EINES</b>!<br><br>
+            Möchtest du gerne nach einer bestimmten Kategorie filtern, wähle im Dropdown bitte die ensprechende Kategorie an.<br><br>
             <div class="row g-3">
-                <div class="form-group col">
+                <div class="form-group col-3">
                     <label for="inputKategorie">Kategorie</label>
                     <select id="inputKategorie" class="form-control" name="kategorie">
                     <!--<input type="text" class="form-control" name="kategorie" placeholder="Kategorie">-->
@@ -23,16 +23,6 @@
                         <option>Services</option>
                         <option>Divers</option>
                         <option>Cash</option>
-                    </select>
-                </div>
-                <div class="form-group col">
-                    <label for="inputBetrag">Betrag</label>
-                    <select id="inputBetrag" class="form-control" name="betrag">
-                        <option selected>...</option>
-                        <option>< 20</option>
-                        <option>< 100</option>
-                        <option>< 200</option>
-                        <option>> 200</option>
                     </select>
                 </div>
             </div>
