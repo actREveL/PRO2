@@ -2,9 +2,9 @@ import json
 from datetime import datetime
 
 
-# Funktion, um eingegebene Daten speichern zu können und in einem File abzuspeichern
+# Funktion, um eingegebene Daten speichern zu können und in einem File abzuspeichern (Json-File wird geschrieben "w")
 def speichern(datum, bezeichnung, kategorie, betrag, notiz):
-    datei = "ausgabe_dict1.json"
+    datei = "ausgabe_dict.json"
     try:
         with open(datei) as open_file:
             datei_inhalt = json.load(open_file)
@@ -21,9 +21,9 @@ def speichern(datum, bezeichnung, kategorie, betrag, notiz):
         json.dump(datei_inhalt, open_file, indent=4)
 
 
-# Funktion, um gespeicherte Daten laden zu können
+# Funktion, um gespeicherte Daten (vom Json-File) laden zu können
 def eingabe_laden():
-    datei_name = "ausgabe_dict1.json"
+    datei_name = "ausgabe_dict.json"
 
     try:
         with open(datei_name) as open_file:

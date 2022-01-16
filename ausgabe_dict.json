@@ -1,0 +1,37 @@
+{
+    "2022-01-16 10:06:54.087138": {
+        "Datum": "10.01.2021",
+        "Bezeichnung": "Spotify-Abo",
+        "Kategorie": "Services",
+        "Betrag": "6.45",
+        "Notiz": "Studi-Abo"
+    },
+    "2022-01-16 10:08:53.752874": {
+        "Datum": "11.01.2021",
+        "Bezeichnung": "Snowboard",
+        "Kategorie": "Divers",
+        "Betrag": "600",
+        "Notiz": "Outlet Landquart"
+    },
+    "2022-01-16 10:09:23.144095": {
+        "Datum": "13.01.2022",
+        "Bezeichnung": "Kleider",
+        "Kategorie": "Shopping",
+        "Betrag": "112.50",
+        "Notiz": "-"
+    },
+    "2022-01-16 10:09:58.928645": {
+        "Datum": "02.02.2021",
+        "Bezeichnung": "Bastelzeug",
+        "Kategorie": "Divers",
+        "Betrag": "56.80",
+        "Notiz": "f\u00fcr Foto-Album"
+    },
+    "2022-01-16 10:10:59.554933": {
+        "Datum": "06.02.2022",
+        "Bezeichnung": "Partey",
+        "Kategorie": "Restaurant / Bar / Club",
+        "Betrag": "70",
+        "Notiz": "Kauz (Eintritt etc.)"
+    }
+}

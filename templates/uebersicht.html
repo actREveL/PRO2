@@ -9,7 +9,6 @@
                 <div class="form-group col-3">
                     <label for="inputKategorie">Kategorie</label>
                     <select id="inputKategorie" class="form-control" name="kategorie">
-                    <!--<input type="text" class="form-control" name="kategorie" placeholder="Kategorie">-->
                         <option selected>Kategorie auswählen...</option>
                         <option>Transport</option>
                         <option>Lebensmittel</option>
@@ -60,27 +59,22 @@
             {% endif %}
             {% endif %}
         </div>
-            <div class="column"><br>
-                {% if not Kat %}
-              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                  <!-- for-Condition -->
-                 {% for key, value_dict in data.items()%}
-                  <div class="col">
-                      <div class="card h-100" style="width: 18rem;">
-                          <div class="card">
-                              <div class="card-body">
-                                  {% for key2, value in value_dict.items()%}
-                                    <h5 class="card-title">{{ key2 }}</h5>
-                                    <p class="card-text">{{ value }}</p>
-                                  {% endfor %}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  {% endfor %}
-              </div>
-                {% endif %}
+        {% if not Kat %}
+        <div class="card-columns">
+            <!-- for-Condition -->
+            {% for key, value_dict in data.items()%}
+            <div class="card h-100">
+                <div class="card-body">
+                    {% for key2, value in value_dict.items()%}
+                    <h5 class="card-title">{{ key2 }}</h5>
+                    <p class="card-text">{{ value }}</p>
+                    {% endfor %}
+                </div>
             </div>
+            <!--</div>-->
+            {% endfor %}
+        </div>
+        {% endif %}
         <br>
     </div>
 {% endblock %}

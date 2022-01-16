@@ -7,46 +7,58 @@ from plotly.offline import plot
 
 app = Flask("Your Budget Calculator")
 
+"""
+Diese Webapplikation wurde selbst gechrieben. Nichts wurde "kopiert". 
+Hilfsmittel dabei waren Informationen aus den Vorlesungen von Prog1 & Prog2, vereinzelte Youtube-Tutorials,
+Seiten wie bspw. W3Schools oder die Jinga Dokumentation usw., die Boostrap Dokumentation und zu einem grossen Teil die 
+jeweiligen Tutoring-Sessions mit F. Odoni und M. Schmid.
+"""
+
+
 # Home / Startseite
 @app.route('/', methods=['GET', 'POST'])
 def home():
     # wird der Button "Senden" gedrückt, erscheint die Formularseite, sonst normal die Startseite
     if request.method == 'POST':
         return render_template('formular.html')
-    return render_template('index.html', user="Samira")  # --> hier wird der Begrüssungsname mitgegeben (Samira)
+    return render_template('index.html', user="Samira")  # hier wird der Begrüssungsname mitgegeben (Samira)
 
-# Custom Error Pages
-# Invalid URL (Seite nicht gefunden)
+
+# Benutzerdefinierte Fehlerseiten
+# Ungültige URL (Seite nicht gefunden)
 @app.errorhandler(404)
 def page_not_found():
     return render_template("404.html"), 404
 
-# Internal Server Error URL
+
+# Interner Serverfehler URL
 @app.errorhandler(500)
 def page_not_found():
     return render_template("500.html"), 500
 
-# Formularseite --> hier können neue Ausgaben angegeben werden
+
+# Formularseite --> hier können neue Ausgaben erfasst werden
 @app.route('/formular', methods=['GET', 'POST'])
 def formular():
-    if request.method == 'POST':
-        datum = request.form['datum']  # Was im Feld "Name" eingegeben wurde, wird hiermit aufgerufen usw.
+    if request.method == 'POST':  # nur wenn der Button "Senden" gedrückt wird
+        datum = request.form['datum']  # Was im Feld "Datum" eingegeben wurde, wird hiermit aufgerufen usw.
         bezeichnung = request.form['bezeichnung']
         kategorie = request.form['kategorie']
         betrag = request.form['betrag']
         notiz = request.form['notiz']
-        # eigegebene Daten werden gespeichert
+        # damit werden die eingegebenen Daten gespeichert
         daten.speichern(datum, bezeichnung, kategorie, betrag, notiz)
 
     # formular.html wird gerendert und zeigt leere Zeilen an, wenn nicht eingegeben.
     # Wird dann jedoch etwas eingegeben und gesendet, werden diese Daten mit daten.speichern (Funktion in daten.py)
-    # im json-file abgespeichert.
+    # im Json-file abgespeichert.
     return render_template('formular.html')
+
 
 # Übersichtsseite mit Cards --> holt Infos aus daten.py (dem Dictionary) und stellt sie "schön" dar
 @app.route('/uebersicht', methods=['GET', 'POST'])
 def uebersicht():
-    eingabe = daten.eingabe_laden()
+    eingabe = daten.eingabe_laden()  # holt Daten aus daten.py
     filter_liste = []
     filter = ""
     filter_key = ""
@@ -56,21 +68,18 @@ def uebersicht():
     if request.method == 'POST':
         gefiltert = True
         kategorie = request.form['kategorie']
-        betrag = request.form['betrag']
 
         if kategorie != "":
             filter = kategorie
             filter_key = "Kategorie"
 
-        if betrag != "":
-            filter = betrag
-            filter_key = "Betrag"
-
         for key, eintrag in eingabe.items():  # in dieser for-Schleife wird gefiltert und die leere Liste gefüllt
             if eintrag[filter_key] == filter:
                 filter_liste.append(eintrag)
 
+    # hier werden die Informationen mitgegeben, die im template "uebersicht" aufgerufen werden können
     return render_template('uebersicht.html', data=eingabe, user=filter_liste, Kat=gefiltert)
+
 
 # Übersichtsseite mit Balkendiagramm
 @app.route('/ausgabe', methods=['GET', 'POST'])
@@ -88,12 +97,10 @@ def statistik():
 
     x = list(monate.keys())  # Liste für Monate --> kann so in Barchart eingelesen werden
     y = list(monate.values())  # Liste für Beträge/Monat --> kann so in Barchart eingelesen werden
-    # nutzer = ausgabe.get("Name") #--> wieso funktioniert das nicht?!
 
     # hier wird der Barchart erstellt bzw. werden die Daten mitgegeben, welche für den Barchart erforderlich sind
     fig = px.bar(x=x, y=y, labels={"x": "Monate",
                                    "y": "Betrag in CHF"},
-                 # color=y[1],
                  title="Ausgaben über die Monate hinweg")
     # https://plotly.com/python/figure-labels/ für Benennung der Achsen & Titel mittels labels
     # https://careerkarma.com/blog/python-typeerror-unhashable-type-list/ --> für Problembehebung "unhashable list"
@@ -126,5 +133,8 @@ def statistik():
     # mit den Beiträgen/Monat und die Gesamtausgaben über alle Einträge hinweg
     return render_template('ausgabe.html', viz_div=div, monate=monate, total=sum, ergebnis=verfuegbar)
 
-if __name__ == "__main__":
+
+if __name__ == "__main__":  # Im Browser kann http://127.0.0.1:5000/ aufgerufen werden und die Startseite erscheint.
     app.run(debug=True, port=5000)
+
+

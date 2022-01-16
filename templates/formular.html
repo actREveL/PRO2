@@ -2,74 +2,82 @@
 {% include "header.html" %}
     <div class="container">
         {% block content %}
-        <br><h2>Neuer Eintrag</h2>
+        <br>
+        <h2>Neuer Eintrag</h2>
         <h6>Bitte fülle das untenstehende Formular aus.</h6>
-        <form method="POST">
+        <form method="POST" class="was-validated">
                 <div class="form-group">
                     <label for="datum">Wann hast du dir etwas gegönnt?</label>
                     <input class="form-control" type="text" name="datum" placeholder="Datum" id="datum" required>
-                    <!--<div class="valid-feedback">Valid.</div>-->
+                    <div class="valid-feedback">Valid.</div>
                 </div>
                 <div class="form-group">
                     <label for="bezeichnung">Was hast du dir gegönnt?</label>
-                    <input class="form-control" type="text" name="bezeichnung" placeholder="Bezeichnung" id="bezeichnung">
+                    <input class="form-control" type="text" name="bezeichnung" placeholder="Bezeichnung" id="bezeichnung" required>
+                    <div class="valid-feedback">Valid.</div>
                 </div>
                 <div class="form-group">
                     <label for="betrag">Wie viel hat es gekostet?</label>
-                    <input class="form-control" type="text" name="betrag" placeholder="Betrag" id="betrag">
+                    <input class="form-control" type="text" name="betrag" placeholder="Betrag" id="betrag" required>
+                    <div class="valid-feedback">Valid.</div>
                 </div>
                 Welcher Kategorie möchtest du es zuordnen?<br><br>
+            <div class="form-group">
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category1" name="kategorie" value="Transport">
+                    <input type="radio" class="form-check-input" id="category1" name="kategorie" value="Transport" required>
                     <label class="form-check-label" for="category1">Transport</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category2" name="kategorie" value="Lebensmittel">
+                    <input type="radio" class="form-check-input" id="category2" name="kategorie" value="Lebensmittel" required>
                     <label class="form-check-label" for="category2">Lebensmittel</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category3" name="kategorie" value="Auto / Motorrad">
+                    <input type="radio" class="form-check-input" id="category3" name="kategorie" value="Auto / Motorrad" required>
                     <label class="form-check-label" for="category3">Auto / Motorrad</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category4" name="kategorie" value="Restaurant / Bar / Club">
+                    <input type="radio" class="form-check-input" id="category4" name="kategorie" value="Restaurant / Bar / Club" required>
                     <label class="form-check-label" for="category4">Restaurant / Bar / Club</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category5" name="kategorie" value="Schönheit">
+                    <input type="radio" class="form-check-input" id="category5" name="kategorie" value="Schönheit" required>
                     <label class="form-check-label" for="category5">Schönheit</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category6" name="kategorie" value="Shopping">
+                    <input type="radio" class="form-check-input" id="category6" name="kategorie" value="Shopping" required>
                     <label class="form-check-label" for="category6">Shopping</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category7" name="kategorie" value="Reisen">
+                    <input type="radio" class="form-check-input" id="category7" name="kategorie" value="Reisen" required>
                     <label class="form-check-label" for="category7">Reisen</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category8" name="kategorie" value="Haushalt">
+                    <input type="radio" class="form-check-input" id="category8" name="kategorie" value="Haushalt" required>
                     <label class="form-check-label" for="category8">Haushalt</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category9" name="kategorie" value="Freizeit">
+                    <input type="radio" class="form-check-input" id="category9" name="kategorie" value="Freizeit" required>
                     <label class="form-check-label" for="category9">Freizeit</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category10" name="kategorie" value="Services">
+                    <input type="radio" class="form-check-input" id="category10" name="kategorie" value="Services" required>
                     <label class="form-check-label" for="category10">Services</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category11" name="kategorie" value="Divers">
+                    <input type="radio" class="form-check-input" id="category11" name="kategorie" value="Divers" required>
                     <label class="form-check-label" for="category11">Divers</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" class="form-check-input" id="category12" name="kategorie" value="Cash">
+                    <input type="radio" class="form-check-input" id="category12" name="kategorie" value="Cash" required>
                     <label class="form-check-label" for="category12">Cash</label>
-                </div><br>
+                    <div class="invalid-feedback">Bitte wähle eine Kategorie aus.</div>
+                </div>
+            </div>
+            <br>
                 <div class="form-group">
                     <label for="notiz">Wenn du möchtest, kannst du hier noch eine Notiz erfassen:</label>
-                    <input class="form-control" type="text" name="notiz" placeholder="Notiz" id="notiz" aria-describedby="HelpBlock">
+                    <input class="form-control" type="text" name="notiz" placeholder="Notiz" id="notiz" aria-describedby="HelpBlock" required>
+                    <div class="valid-feedback">Valid.</div>
                     <small id="HelpBlock" class="form-text text-muted">
                         Möchtest du keine Notiz erfassen, bitte ein "-" (Bindestrich) einsetzen.
                     </small>

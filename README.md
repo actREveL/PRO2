@@ -38,7 +38,7 @@ Dieser hat sich jedoch im Laufe des Projektes verändert. Hier eine kurze Erklä
 
 Das neue Ablaufdiagramm sieht nun also folgendermassen aus:
 
-![Ablaufdiagramm_neu.png](Ablaufdiagramm_neu.png)
+![img_1.png](img_1.png)
 
 ## Anleitung/Walkthrough 
 ### Installation / Benutzung
