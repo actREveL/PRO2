@@ -49,6 +49,10 @@ def formular():
         # damit werden die eingegebenen Daten gespeichert
         daten.speichern(datum, bezeichnung, kategorie, betrag, notiz)
 
+        eintrag_gespeichert = "Dein Eintrag wurde erfasst. Bei Bedarf kann nun ein weiterer Eintrag erfolgen."
+
+        return render_template('formular.html', eintrag=eintrag_gespeichert)
+
     # formular.html wird gerendert und zeigt leere Zeilen an, wenn nicht eingegeben.
     # Wird dann jedoch etwas eingegeben und gesendet, werden diese Daten mit daten.speichern (Funktion in daten.py)
     # im Json-file abgespeichert.
@@ -60,7 +64,7 @@ def formular():
 def uebersicht():
     eingabe = daten.eingabe_laden()  # holt Daten aus daten.py
     filter_liste = []
-    filter = ""
+    filter_value = ""
     filter_key = ""
     gefiltert = False
 
@@ -70,11 +74,11 @@ def uebersicht():
         kategorie = request.form['kategorie']
 
         if kategorie != "":
-            filter = kategorie
+            filter_value = kategorie
             filter_key = "Kategorie"
 
         for key, eintrag in eingabe.items():  # in dieser for-Schleife wird gefiltert und die leere Liste gefüllt
-            if eintrag[filter_key] == filter:
+            if eintrag[filter_key] == filter_value:
                 filter_liste.append(eintrag)
 
     # hier werden die Informationen mitgegeben, die im template "uebersicht" aufgerufen werden können
@@ -87,7 +91,7 @@ def statistik():
     ausgabe = daten.eingabe_laden()  # Dictionary (alle Daten) von daten.py wird geladen
     monate = {}  # leeres dict für Monate 01-12 (Jan-Dez) definiert, welches mit der unteren for-Schleife gefüllt wird
 
-    for id, values in ausgabe.items():
+    for key, values in ausgabe.items():
         month = values["Datum"].split(".")[1]  # Datum splitten, sodass nur Monat (01 = Jan etc.) übrigbleibt
 
         if not monate.get(month):
@@ -110,31 +114,24 @@ def statistik():
 
     # Summe berechnen für Total (über alle Monate hinweg)
     sum_liste = list(monate.values())
-    sum = 0
+    summe = 0
     for element in sum_liste:
-        sum += float(element)
+        summe += float(element)
 
-    # Summe Monat berechnen
-    sum_monat = 0
-    if request.method == 'POST':
-        monat = request.form['monat']
-        if monat in x:
-            for element in y:
-                sum_monat = element
-
-    # Budget berechnen
+    # Summe Monat und Budget berechnen
     verfuegbar = 0
     if request.method == 'POST':
-        budget = request.form['budget']
-        budget = float(budget) - float(sum_monat)
-        verfuegbar = verfuegbar + budget
+        month = request.form['monat']
+        sum_monat = monate[month]
+        budget_eingabe = float(request.form['budget'])
+        budget = budget_eingabe - float(sum_monat)
+        verfuegbar = round(verfuegbar + budget, 2)
+        # für Funktion "round" --> https://www.delftstack.com/de/howto/python/python-truncate-float-python/
 
     # rendern des Templates "ausgabe.html" zeigt dann den Barchart an und nimmt Monate und Total mit für die Liste
     # mit den Beiträgen/Monat und die Gesamtausgaben über alle Einträge hinweg
-    return render_template('ausgabe.html', viz_div=div, monate=monate, total=sum, ergebnis=verfuegbar)
+    return render_template('ausgabe.html', viz_div=div, monate=monate, total=summe, ergebnis=verfuegbar)
 
 
 if __name__ == "__main__":  # Im Browser kann http://127.0.0.1:5000/ aufgerufen werden und die Startseite erscheint.
     app.run(debug=True, port=5000)
-
-
