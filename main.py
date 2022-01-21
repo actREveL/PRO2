@@ -27,13 +27,13 @@ def home():
 # Benutzerdefinierte Fehlerseiten
 # Ungültige URL (Seite nicht gefunden)
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(e):
     return render_template("404.html"), 404
 
 
 # Interner Serverfehler URL
 @app.errorhandler(500)
-def page_not_found():
+def page_not_found(e):
     return render_template("500.html"), 500
 
 
